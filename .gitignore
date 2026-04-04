@@ -1,0 +1,8 @@
+.DS_Store
+.idea/
+__pycache__/
+*.pyc
+
+CSV_file/.DS_Store
+CSV_file/.matplotlib/
+CSV_file/__pycache__/
