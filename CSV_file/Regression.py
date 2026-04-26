@@ -35,14 +35,14 @@ from country_metadata import (
 countries = COUNTRY_NAMES_BY_CODE
 
 start_year = 1945
-end_year = 2015
+end_year = 2025
 
-OUTPUT_DIR = SCRIPT_DIR
+OUTPUT_DIR = PROJECT_DIR
 PROJECT_ROOT = RESEARCH_ROOT
 CACHE_DIR = OUTPUT_DIR / "world_bank_cache"
 CACHE_DIR.mkdir(exist_ok=True)
 FORD_RAW_FILE = OUTPUT_DIR / "ford-foundation.csv"
-WB_INDEX_DIR = OUTPUT_DIR / "WB_index"
+WB_INDEX_DIR = SCRIPT_DIR / "WB_index"
 WB_RULE_OF_LAW_FILE = WB_INDEX_DIR / "API_RL.EST_DS2_en_csv_v2_5814.csv"
 WB_RULE_OF_LAW_INDICATOR_CODE = "RL.EST"
 WB_RULE_OF_LAW_INDICATOR_NAME = "Rule of Law: Estimate"
@@ -61,7 +61,7 @@ GDP_PER_CAPITA_CLEAN_FILE = PROJECT_ROOT / "Statics_Analysis/CleanData/Clean_GDP
 HISTORICAL_GDP_GROWTH_FILE = PROJECT_ROOT / "Statics_Analysis/CleanData/Clean_GDP_Growth_1945_1989.csv"
 ALIGNMENT_REPORT_FILE = OUTPUT_DIR / "country_name_alignment_check.csv"
 TREND_GDP_SOURCE_START_YEAR = 1945
-TREND_GDP_SOURCE_END_YEAR = 2015
+TREND_GDP_SOURCE_END_YEAR = 2025
 MODERN_GDP_SOURCE_START_YEAR = 1961
 HISTORICAL_GDP_EXTENSION_END_YEAR = 1960
 
@@ -733,10 +733,16 @@ export_country_alignment_check(rule_of_law_index, world_bank_name_by_code)
 # =========================================================
 
 analysis_df = df.dropna(subset=["rule_of_law_estimate", "gdp_growth"]).copy()
-trend_gdp_direct_df = load_statics_annual_gdp_growth(
-    countries,
-    MODERN_GDP_SOURCE_START_YEAR,
-    TREND_GDP_SOURCE_END_YEAR,
+trend_gdp_direct_df = (
+    gdp_growth[
+        gdp_growth["year"].between(
+            MODERN_GDP_SOURCE_START_YEAR,
+            TREND_GDP_SOURCE_END_YEAR,
+            inclusive="both",
+        )
+    ][["country_code", "country", "year", "gdp_growth"]]
+    .dropna(subset=["gdp_growth"])
+    .copy()
 )
 trend_gdp_historical_df = load_statics_historical_gdp_extension(
     TREND_GDP_SOURCE_START_YEAR,

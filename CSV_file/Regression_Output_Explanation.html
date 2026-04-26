@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regression Output Explanation</title>
+</head>
+<body>
+  <h1>Regression Output Explanation</h1>
+  <p>
+    This project uses the official World Bank Worldwide Governance Indicators
+    rule-of-law series <code>RL.EST</code> (<code>Rule of Law: Estimate</code>)
+    as the rule-of-law variable in the regression outputs.
+  </p>
+
+  <h2>Rule-of-Law Variable</h2>
+  <table border="1" cellpadding="6" cellspacing="0">
+    <tr><th>Item</th><th>Value</th></tr>
+    <tr><td>Indicator code</td><td><code>RL.EST</code></td></tr>
+    <tr><td>Indicator name</td><td>Rule of Law: Estimate</td></tr>
+    <tr><td>Source</td><td>World Bank WGI</td></tr>
+    <tr><td>Local CSV</td><td><code>CSV_file/WB_index/API_RL.EST_DS2_en_csv_v2_5814.csv</code></td></tr>
+    <tr><td>Analysis window</td><td><code>1996-2015</code></td></tr>
+  </table>
+
+  <h2>Interpretation</h2>
+  <ul>
+    <li>Higher <code>RL.EST</code> values indicate stronger perceived rule of law.</li>
+    <li>Lower <code>RL.EST</code> values indicate weaker perceived rule of law.</li>
+    <li>The measure is a standardized governance estimate, not a funding or investment index.</li>
+    <li>The values should not be interpreted as percentages.</li>
+  </ul>
+
+  <h2>Regression Reading</h2>
+  <p>The regression figures in this repository should be interpreted as relationships between GDP growth, GDP level, life expectancy, and <code>RL.EST</code>.</p>
+</body>
+</html>
